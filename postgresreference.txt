@@ -1,0 +1,11 @@
+psql \
+   --host=terraform-20220517063121776300000001.cc3fkwrnrapt.us-east-1.rds.amazonaws.com \
+   --port=5432 \
+   --username=dbpostgress \
+   --password \
+   --dbname=mydb
+
+
+https://www.cherryservers.com/blog/how-to-install-and-setup-postgresql-server-on-ubuntu-20-04
+
+https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html
