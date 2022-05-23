@@ -14,16 +14,16 @@ resource "aws_internet_gateway" "demogateway" {
 }
 
 
-resource "aws_subnet" "demosubnet" {
-  count= length(var.pubsub)  
-  vpc_id                  = "${aws_vpc.dev.id}"
-  cidr_block             = var.pubsub[count.index]
-  map_public_ip_on_launch = true
-  availability_zone = var.azs[count.index]
-  tags = {
-    Name = "subnets"
-  }
-}
+#resource "aws_subnet" "demosubnet" {
+  #count= length(var.pubsub)  
+ # vpc_id                  = "${aws_vpc.dev.id}"
+  #cidr_block             = var.pubsub[count.index]
+#  map_public_ip_on_launch = true
+  #availability_zone = var.azs[count.index]
+ # tags = {
+  #  Name = "subnets"
+ # }
+#}
 
 
 resource "aws_subnet" "dbsubnet" {
@@ -78,20 +78,20 @@ resource "aws_route_table" "privateroute" {
 
 
 resource "aws_route_table_association" "rt1" {
-   subnet_id = "${aws_subnet.demosubnet[0].id}"
+   subnet_id = "${aws_subnet.subnets[0].id}"
    route_table_id = "${aws_route_table.publicroute.id}"
 }
 resource "aws_route_table_association" "rt2" {
-   subnet_id = "${aws_subnet.demosubnet[1].id}"
+   subnet_id = "${aws_subnet.subnets[1].id}"
    route_table_id = "${aws_route_table.publicroute.id}"
 }
 
 resource "aws_route_table_association" "rt3" {
-   subnet_id = "${aws_subnet.dbsubnet[0].id}"
+   subnet_id = "${aws_subnet.subnets[2].id}"
    route_table_id = "${aws_route_table.privateroute.id}"
 }
 
 resource "aws_route_table_association" "rt4" {
-   subnet_id = "${aws_subnet.dbsubnet[1].id}"
+   subnet_id = "${aws_subnet.subnets[3].id}"
    route_table_id = "${aws_route_table.privateroute.id}"
 }   
