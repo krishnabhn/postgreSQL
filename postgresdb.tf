@@ -1,9 +1,9 @@
-resource "aws_db_subnet_group" "db-group" {
-  name       = "db-group"
-  subnet_ids = ["${aws_subnet.dbsubnet[0].id}", "${aws_subnet.dbsubnet[1].id}"]
+resource "aws_db_subnet_group" "dbgroup" {
+  name       = "dbgroup"
+  subnet_ids = ["${aws_subnet.subnets[2].id}", "${aws_subnet.subnets[3].id}"]
 
   tags = {
-    Name = "db-group"
+    Name = "dbgroup"
   }
 }
 
@@ -16,7 +16,7 @@ resource "aws_db_instance" "db" {
   name                 = "mydb"
   username             = "dbadmin1"
   password             = "postgress"
-  db_subnet_group_name = aws_db_subnet_group.db-group.name
+  db_subnet_group_name = aws_db_subnet_group.dbgroup.name
   vpc_security_group_ids = [ "${aws_security_group.db-sg.id}" ]
   availability_zone = var.azs[0]
   tags = {
